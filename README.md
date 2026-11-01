@@ -5,7 +5,7 @@ This repository contains a reproducible technical workflow for cleaning, standar
 ## Project structure
 
 ```text
-sesame_workflow_project/
+workflow_project/
 ├── R/
 │   ├── 00_config.R
 │   ├── 01_import_fieldbook.R
