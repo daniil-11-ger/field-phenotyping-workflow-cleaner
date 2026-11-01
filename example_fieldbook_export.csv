@@ -1,0 +1,17 @@
+uuid,entry,block,row,column,trait,value,person,timestamp,device_name,notes
+P001,PI285177,1,1,1,plant_height,112.5,DG,2025-05-01 06:30:00,Google Pixel 6a,
+P001,PI285177,1,1,1,internode_length,8.5,DG,2025-05-01 06:31:00,Google Pixel 6a,
+P001,PI285177,1,1,1,branch_number,6,DG,2025-05-01 06:32:00,Google Pixel 6a,
+P001,PI285177,1,1,1,capsule_count,125,DG,2025-05-01 06:33:00,Google Pixel 6a,
+P002,PI285178,1,1,2,plant_height,118.0,YB,2025-05-01 06:34:00,Google Pixel 6a,
+P002,PI285178,1,1,2,internode_length,-990,YB,2025-05-01 06:35:00,Google Pixel 6a,missing code
+P002,PI285178,1,1,2,branch_number,7,YB,2025-05-01 06:36:00,Google Pixel 6a,
+P002,PI285178,1,1,2,capsule_count,140,YB,2025-05-01 06:37:00,Google Pixel 6a,
+P003,PI285179,2,2,1,plant_height,135.0,CJ,2025-05-01 07:00:00,Google Pixel 6a,
+P003,PI285179,2,2,1,internode_length,85,CJ,2025-05-01 07:01:00,Google Pixel 6a,decimal typo suspected
+P003,PI285179,2,2,1,branch_number,8,CJ,2025-05-01 07:02:00,Google Pixel 6a,
+P003,PI285179,2,2,1,capsule_count,160,CJ,2025-05-01 07:03:00,Google Pixel 6a,
+P004,PI285180,2,2,2,plant_height,-12,DG,2025-05-01 07:04:00,Google Pixel 6a,impossible value
+P004,PI285180,2,2,2,internode_length,7.8,DG,2025-05-01 07:05:00,Google Pixel 6a,
+P004,PI285180,2,2,2,branch_number,5,DG,2025-05-01 07:06:00,Google Pixel 6a,
+P004,PI285180,2,2,2,capsule_count,115,DG,2025-05-01 07:07:00,Google Pixel 6a,

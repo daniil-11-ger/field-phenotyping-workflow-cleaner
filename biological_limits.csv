@@ -1,0 +1,7 @@
+trait,min_value,max_value,unit,reason
+plant_height,0,250,cm,Negative values and unrealistically tall values are treated as invalid or outliers
+internode_length,0,50,cm,Negative values and extreme values such as 85 cm are treated as invalid or probable decimal errors
+branch_number,0,80,count,Negative or biologically impossible branch counts are invalid
+capsule_count,0,1000,count,Negative or unrealistically high values are invalid
+days_to_flowering,15,120,days,Phenological values outside plausible range are invalid
+days_to_maturity,40,200,days,Phenological values outside plausible range are invalid

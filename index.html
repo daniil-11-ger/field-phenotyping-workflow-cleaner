@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sesame Phenotyping Workflow Demo</title>
+  <style>
+    :root { --bg:#f7fafc; --panel:#fff; --ink:#1a202c; --muted:#718096; --brand:#2c7a7b; --line:#e2e8f0; }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; background:var(--bg); color:var(--ink); }
+    header { padding:30px 36px; background:linear-gradient(135deg,#1f6f78,#38a169); color:white; }
+    header h1 { margin:0; font-size:32px; }
+    header p { margin:8px 0 0; opacity:.92; max-width:900px; }
+    main { padding:28px 36px; display:grid; gap:22px; }
+    .cards { display:grid; grid-template-columns:repeat(4,minmax(160px,1fr)); gap:16px; }
+    .card { background:var(--panel); border-radius:18px; padding:20px; box-shadow:0 8px 22px rgba(0,0,0,.06); border:1px solid var(--line); }
+    .metric { font-size:30px; font-weight:800; color:var(--brand); }
+    .label { color:var(--muted); font-size:14px; margin-top:4px; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+    h2 { margin:0 0 14px; font-size:20px; }
+    input, button { font-size:15px; }
+    button { border:0; border-radius:12px; background:var(--brand); color:white; padding:12px 18px; font-weight:700; cursor:pointer; }
+    table { width:100%; border-collapse:collapse; font-size:14px; }
+    th, td { border-bottom:1px solid var(--line); padding:8px; text-align:left; }
+    th { color:#2d3748; background:#f8fafc; }
+    .bar { height:24px; background:#319795; border-radius:8px; margin:6px 0; }
+    .small { color:var(--muted); font-size:13px; }
+    canvas { width:100%; min-height:320px; border:1px solid var(--line); border-radius:14px; background:#fff; }
+    @media (max-width: 900px) { .cards,.grid { grid-template-columns:1fr; } header, main { padding:22px; } }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Sesame Phenotyping Workflow</h1>
+  <p>Легкая статическая демо-страница для показа идеи интерактивного приложения. Для полной обработки, экспорта и моделей используйте R Shiny-версию из папки <b>shiny_app</b>.</p>
+</header>
+<main>
+  <section class="card">
+    <h2>Загрузить Field Book CSV</h2>
+    <input id="file" type="file" accept=".csv" />
+    <button id="demo">Открыть демо-данные</button>
+    <p class="small">Страница работает прямо в браузере и не отправляет данные на сервер. Ожидаемые колонки: uuid, entry, block, row, column, trait, value.</p>
+  </section>
+
+  <section class="cards">
+    <div class="card"><div id="mRecords" class="metric">0</div><div class="label">записей</div></div>
+    <div class="card"><div id="mPlants" class="metric">0</div><div class="label">растений</div></div>
+    <div class="card"><div id="mTraits" class="metric">0</div><div class="label">признаков</div></div>
+    <div class="card"><div id="mFlagged" class="metric">0</div><div class="label">аномалий</div></div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Количество наблюдений по признакам</h2>
+      <div id="bars"></div>
+    </div>
+    <div class="card">
+      <h2>Карта поля</h2>
+      <canvas id="map" width="680" height="360"></canvas>
+      <p class="small">Цветовая насыщенность показывает среднее значение выбранного признака для позиции row/column.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>QC summary</h2>
+    <div id="table"></div>
+  </section>
+</main>
+<script>
+const demoCsv = `uuid,entry,block,row,column,trait,value,person,timestamp,device_name,notes
+P001,PI285177,1,1,1,plant_height,112.5,DG,2025-05-01 06:30:00,Google Pixel 6a,
+P001,PI285177,1,1,1,internode_length,8.5,DG,2025-05-01 06:31:00,Google Pixel 6a,
+P001,PI285177,1,1,1,branch_number,6,DG,2025-05-01 06:32:00,Google Pixel 6a,
+P001,PI285177,1,1,1,capsule_count,125,DG,2025-05-01 06:33:00,Google Pixel 6a,
+P002,PI285178,1,1,2,plant_height,118.0,YB,2025-05-01 06:34:00,Google Pixel 6a,
+P002,PI285178,1,1,2,internode_length,-990,YB,2025-05-01 06:35:00,Google Pixel 6a,missing code
+P002,PI285178,1,1,2,branch_number,7,YB,2025-05-01 06:36:00,Google Pixel 6a,
+P002,PI285178,1,1,2,capsule_count,140,YB,2025-05-01 06:37:00,Google Pixel 6a,
+P003,PI285179,2,2,1,plant_height,135.0,CJ,2025-05-01 07:00:00,Google Pixel 6a,
+P003,PI285179,2,2,1,internode_length,85,CJ,2025-05-01 07:01:00,Google Pixel 6a,decimal typo suspected
+P003,PI285179,2,2,1,branch_number,8,CJ,2025-05-01 07:02:00,Google Pixel 6a,
+P003,PI285179,2,2,1,capsule_count,160,CJ,2025-05-01 07:03:00,Google Pixel 6a,
+P004,PI285180,2,2,2,plant_height,-12,DG,2025-05-01 07:04:00,Google Pixel 6a,impossible value
+P004,PI285180,2,2,2,internode_length,7.8,DG,2025-05-01 07:05:00,Google Pixel 6a,
+P004,PI285180,2,2,2,branch_number,5,DG,2025-05-01 07:06:00,Google Pixel 6a,
+P004,PI285180,2,2,2,capsule_count,115,DG,2025-05-01 07:07:00,Google Pixel 6a,`;
+const limits = { plant_height:[0,250], internode_length:[0,50], branch_number:[0,80], capsule_count:[0,1000], days_to_flowering:[15,120], days_to_maturity:[40,200] };
+function parseCSV(text){ const lines=text.trim().split(/\r?\n/); const headers=lines[0].split(',').map(x=>x.trim()); return lines.slice(1).map(line=>{ const vals=line.split(','); const o={}; headers.forEach((h,i)=>o[h]=vals[i]??''); return o; }); }
+function isFlagged(r){ const v=Number(r.value); if(!Number.isFinite(v)) return true; if(['-990','-999','9999',''].includes(String(r.value).trim())) return true; const lim=limits[r.trait]; return lim ? (v<lim[0] || v>lim[1]) : false; }
+function render(rows){
+  const traits=[...new Set(rows.map(r=>r.trait))]; const plants=[...new Set(rows.map(r=>r.uuid))]; const flagged=rows.filter(isFlagged);
+  mRecords.textContent=rows.length; mPlants.textContent=plants.length; mTraits.textContent=traits.length; mFlagged.textContent=flagged.length;
+  const counts={}; rows.forEach(r=>counts[r.trait]=(counts[r.trait]||0)+1); const max=Math.max(...Object.values(counts),1);
+  bars.innerHTML=Object.entries(counts).map(([k,v])=>`<div><b>${k}</b><div class="bar" style="width:${100*v/max}%"></div><span class="small">${v} observations</span></div>`).join('');
+  const qc=traits.map(t=>{ const subset=rows.filter(r=>r.trait===t); const fl=subset.filter(isFlagged).length; const nums=subset.map(r=>Number(r.value)).filter(Number.isFinite); const mean=nums.length ? (nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(2) : 'NA'; return {trait:t,n:subset.length,flagged:fl,mean}; });
+  table.innerHTML='<table><thead><tr><th>Trait</th><th>N</th><th>Flagged</th><th>Mean raw</th></tr></thead><tbody>'+qc.map(r=>`<tr><td>${r.trait}</td><td>${r.n}</td><td>${r.flagged}</td><td>${r.mean}</td></tr>`).join('')+'</tbody></table>';
+  drawMap(rows, traits[0]);
+}
+function drawMap(rows, trait){ const c=document.getElementById('map'),ctx=c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height); const d=rows.filter(r=>r.trait===trait && Number.isFinite(Number(r.value)) && !isFlagged(r)); const maxRow=Math.max(...d.map(r=>Number(r.row)),1), maxCol=Math.max(...d.map(r=>Number(r.column)),1); const vals=d.map(r=>Number(r.value)); const min=Math.min(...vals,0), max=Math.max(...vals,1); const cellW=(c.width-70)/maxCol, cellH=(c.height-60)/maxRow; ctx.font='14px system-ui'; ctx.fillStyle='#1a202c'; ctx.fillText('Trait: '+trait,20,24); d.forEach(r=>{ const val=Number(r.value); const alpha=(val-min)/(max-min || 1); ctx.fillStyle=`rgba(44,122,123,${0.2+0.75*alpha})`; ctx.fillRect(50+(Number(r.column)-1)*cellW,40+(Number(r.row)-1)*cellH,cellW-4,cellH-4); ctx.fillStyle='#111'; ctx.fillText(r.uuid,55+(Number(r.column)-1)*cellW,62+(Number(r.row)-1)*cellH); }); }
+demo.onclick=()=>render(parseCSV(demoCsv));
+file.onchange=e=>{ const f=e.target.files[0]; if(!f) return; const reader=new FileReader(); reader.onload=()=>render(parseCSV(reader.result)); reader.readAsText(f); };
+render(parseCSV(demoCsv));
+</script>
+</body>
+</html>

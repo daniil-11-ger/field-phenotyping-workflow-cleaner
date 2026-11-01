@@ -1,0 +1,349 @@
+body {
+  background: #f5f7fb;
+}
+.navbar-brand {
+  font-weight: 900;
+  letter-spacing: 0.3px;
+}
+.brand-title span {
+  font-weight: 900;
+  letter-spacing: 0.8px;
+}
+.brand-title small {
+  display: block;
+  font-size: 0.72rem;
+  opacity: 0.78;
+  margin-top: -2px;
+}
+.card {
+  border-radius: 18px;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+.card-header {
+  font-weight: 800;
+  background: #ffffff;
+  border-bottom: 1px solid #e8edf5;
+  border-radius: 18px 18px 0 0 !important;
+}
+.bslib-value-box {
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+}
+.metric-teal {
+  background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%) !important;
+  color: white !important;
+}
+.metric-amber {
+  background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%) !important;
+  color: white !important;
+}
+.btn-primary, .btn-lg {
+  border-radius: 12px;
+  font-weight: 800;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 34px;
+  margin: 12px 0 22px 0;
+  border-radius: 28px;
+  background: radial-gradient(circle at top left, #ccfbf1 0%, #f8fafc 38%, #e0f2fe 100%);
+  border: 1px solid rgba(15, 118, 110, 0.16);
+}
+.hero h1 {
+  font-weight: 950;
+  font-size: 3.2rem;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+  color: #0f172a;
+}
+.hero h3 {
+  color: #0f766e;
+  font-weight: 800;
+}
+.hero p {
+  max-width: 760px;
+  font-size: 1.08rem;
+  color: #334155;
+}
+.hero-tags span {
+  display: inline-block;
+  padding: 7px 12px;
+  margin: 4px;
+  background: rgba(15, 118, 110, 0.10);
+  border: 1px solid rgba(15, 118, 110, 0.20);
+  color: #115e59;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.hero-flow {
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.72);
+  box-shadow: inset 0 0 0 1px rgba(15,23,42,0.05);
+  display: grid;
+  gap: 10px;
+  text-align: center;
+}
+.flow-node {
+  padding: 16px;
+  border-radius: 18px;
+  background: #ffffff;
+  font-weight: 900;
+  color: #0f172a;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+}
+.flow-arrow {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #0f766e;
+}
+.workflow-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+.workflow-strip div {
+  padding: 14px 10px;
+  border-radius: 14px;
+  text-align: center;
+  background: #ecfeff;
+  color: #155e75;
+  font-weight: 850;
+  border: 1px solid #a5f3fc;
+}
+.help-card {
+  background: #ffffff;
+}
+.section-icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 50%;
+  background: #0f766e;
+  color: white;
+  font-style: normal;
+  margin-right: 8px;
+  font-weight: 900;
+}
+.progress {
+  height: 26px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #0f766e, #22c55e);
+  color: white;
+  font-weight: 900;
+  text-align: center;
+  line-height: 26px;
+  transition: width 0.3s ease;
+}
+.progress-label {
+  font-weight: 850;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.story-card {
+  padding: 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
+  border: 1px solid #ccfbf1;
+}
+.story-card h4 {
+  font-weight: 900;
+  color: #0f766e;
+}
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .workflow-strip { grid-template-columns: repeat(2, 1fr); }
+  .story-grid { grid-template-columns: 1fr; }
+}
+
+/* FIELD CLEANER Studio Plus UI fixes */
+:root {
+  --fc-primary: #2563eb;
+  --fc-teal: #14b8a6;
+  --fc-ink: #0f172a;
+  --fc-soft: #eff6ff;
+}
+
+.nav-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.nav-label svg { width: 17px; height: 17px; }
+
+.btn, .btn-primary, .btn-success, .btn-outline-primary, .action-button, .download-button {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-height: 1.18 !important;
+  min-height: 42px;
+  border-radius: 14px !important;
+  font-weight: 850 !important;
+  padding: 10px 14px !important;
+}
+.sidebar .btn, .sidebar .action-button, .sidebar .download-button {
+  width: 100%;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.modern-btn {
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.16);
+  letter-spacing: .2px;
+}
+
+.hero {
+  background: radial-gradient(circle at 10% 15%, #dbeafe 0%, #f8fafc 38%, #ccfbf1 100%);
+}
+.hero h1 {
+  color: var(--fc-primary);
+}
+.hero h3 {
+  color: #0f766e;
+}
+.hero-tags span {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.18);
+  color: #1d4ed8;
+}
+.flow-arrow { color: var(--fc-primary); }
+
+.metric-teal {
+  background: linear-gradient(135deg, #2563eb 0%, #14b8a6 100%) !important;
+  color: white !important;
+}
+.metric-amber {
+  background: linear-gradient(135deg, #f97316 0%, #f59e0b 100%) !important;
+  color: white !important;
+}
+.bslib-value-box .value-box-value,
+.bslib-value-box .value-box-title {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}
+.bslib-value-box .value-box-value {
+  font-size: clamp(1rem, 1.45vw, 1.55rem) !important;
+  line-height: 1.18 !important;
+}
+
+.workflow-strip div {
+  background: linear-gradient(135deg, #eff6ff, #ecfeff);
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+.section-icon {
+  background: linear-gradient(135deg, #2563eb, #14b8a6);
+}
+.progress {
+  height: 30px;
+  margin-top: 6px;
+}
+.progress-bar {
+  background: linear-gradient(90deg, #2563eb, #14b8a6, #10b981);
+  line-height: 30px;
+}
+.progress-label {
+  font-size: 1rem;
+}
+
+.status-grid, .quick-grid, .settings-grid {
+  display: grid;
+  gap: 12px;
+}
+.status-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 12px;
+}
+.status-card {
+  background: linear-gradient(135deg, #ffffff, #eff6ff);
+  border: 1px solid #dbeafe;
+  border-radius: 18px;
+  padding: 14px;
+  display: grid;
+  gap: 4px;
+  align-content: center;
+  min-height: 92px;
+}
+.status-card svg { color: #2563eb; width: 24px; height: 24px; }
+.status-card strong { font-size: 1.3rem; color: #0f172a; }
+.status-card span { font-size: .84rem; color: #475569; font-weight: 700; }
+.status-card.warn { background: #fffbeb; border-color: #fde68a; }
+
+.quick-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 16px 0;
+}
+.quick-card {
+  padding: 18px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 45%, #eff6ff 100%);
+  border: 1px solid #dbeafe;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, .07);
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.quick-card h4 { font-weight: 950; color: #1e40af; margin: 8px 0 5px; }
+.quick-card p { color: #475569; font-size: .94rem; }
+.quick-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #2563eb, #14b8a6);
+  color: white;
+}
+.quick-icon svg { width: 24px; height: 24px; }
+.quick-btn { margin-top: 8px; }
+
+.settings-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.setting-pill {
+  padding: 14px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-weight: 850;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.setting-pill svg { color: #2563eb; }
+.preview-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #eff6ff, #ecfeff);
+  border: 1px solid #bfdbfe;
+}
+.preview-card h3 { color: #1e40af; font-weight: 950; }
+.preview-card dt { font-weight: 950; color: #0f172a; }
+.preview-card dd { color: #475569; margin-bottom: 8px; }
+
+@media (max-width: 1200px) {
+  .quick-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .status-grid { grid-template-columns: 1fr; }
+  .settings-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .quick-grid, .settings-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.1rem; }
+}
