@@ -1,6 +1,8 @@
 # Sesame Field Phenotyping and Bioinformatics Workflow
 
-This repository contains a reproducible technical workflow for cleaning, standardizing, visualizing, and modeling field phenotyping data collected for sesame (*Sesamum indicum* L.). The workflow is designed for Field Book CSV exports and prepares data for downstream breeding models such as BLUP/GBLUP and future phenotype-genotype integration.
+This repository contains a reproducible technical workflow for cleaning, standardizing, visualizing, and modeling field phenotyping data collected. The workflow is designed for Field Book CSV exports and prepares data for downstream breeding models such as BLUP/GBLUP and future phenotype-genotype integration.
+
+![App Preview](interface.png)
 
 ## Project structure
 
